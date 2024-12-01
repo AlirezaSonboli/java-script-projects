@@ -1,0 +1,65 @@
+function getFinalNumber(input) {
+    let all_number = 0;
+    let final_number = 0;
+
+    if (input < 10) {
+        final_number = input;
+    } else if (input >= 10 && input <= 189) {
+        all_number = 9 + Math.floor((input - 8) / 2);
+        let numberpos = (input % 2 === 0) ? 'first' : 'second';
+        
+        if (numberpos === 'first') {
+            final_number = Math.floor(all_number / 10);
+        } else {
+            final_number = all_number % 10;
+        }
+    } else if (input > 189 && input <= 2889) {
+        all_number = 99 + Math.floor((input - 187) / 3);
+        let numberpos;
+
+        if (input % 3 === 1) {
+            numberpos = 'first';
+        } else if (input % 3 === 2) {
+            numberpos = 'second';
+        } else {
+            numberpos = 'third';
+        }
+
+        if (numberpos === 'first') {
+            final_number = Math.floor(all_number / 100);
+        } else if (numberpos === 'second') {
+            final_number = Math.floor((all_number / 10) % 10);
+        } else {
+            final_number = all_number % 100;
+        }
+    } else {
+        all_number = 999 + Math.floor((input - 2886) / 4);
+        let numberpos;
+
+        if (input % 4 === 2) {
+            numberpos = 'first';
+        } else if (input % 4 === 3) {
+            numberpos = 'second';
+        } else if (input % 4 === 0) {
+            numberpos = 'third';
+        } else {
+            numberpos = 'fourth';
+        }
+
+        if (numberpos === 'first') {
+            final_number = Math.floor(all_number / 1000);
+        } else if (numberpos === 'second') {
+            final_number = Math.floor((all_number / 100) % 10);
+        } else if (numberpos === 'third') {
+            final_number = Math.floor((all_number / 10) % 100);
+        } else {
+            final_number = all_number % 1000;
+        }
+    }
+
+    return final_number;
+}
+
+// Example usage:
+const input = parseInt(prompt("Enter a number: "), 10);
+console.log(getFinalNumber(input));
